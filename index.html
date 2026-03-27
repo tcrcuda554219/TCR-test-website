@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IT Security Society – Powered by TCR IT Solutions</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600;700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark:     '#040e1c',
+              navy:     '#071627',
+              navy2:    '#0d2140',
+              blue:     '#1a4a7a',
+              bright:   '#29ABE2',
+              teal:     '#0ec8c0',
+              orange:   '#f7931e',
+              grey:     '#8899aa',
+              greydk:   '#1a2d42',
+            }
+          },
+          fontFamily: {
+            mono:  ['"Roboto Mono"', 'monospace'],
+            sans:  ['Montserrat', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: #fff;
+      color: #1a2d42;
+      font-family: 'Montserrat', sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── Nav link hover ── */
+    .nav-link { transition: color 0.2s; }
+    .nav-link:hover { color: #f7931e; }
+
+    /* ── Service card hover ── */
+    .service-card .overlay { transition: background 0.3s; }
+    .service-card:hover .overlay { background: rgba(4,14,28,0.55); }
+    .service-card:hover .card-inner { transform: translateY(-4px); transition: transform 0.3s cubic-bezier(.22,.68,0,1.2); }
+    .card-inner { transition: transform 0.3s; }
+
+    /* ── Feature tick ── */
+    .tick::before {
+      content: '';
+      display: inline-block;
+      width: 20px; height: 20px;
+      background: #f7931e;
+      border-radius: 50%;
+      margin-right: 10px;
+      flex-shrink: 0;
+    }
+
+    /* ── CTA btn ── */
+    .btn-orange {
+      background: #f7931e;
+      color: #fff;
+      font-family: 'Roboto Mono', monospace;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 14px 32px;
+      display: inline-block;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-orange:hover { background: #e07e0e; transform: translateY(-2px); }
+    .btn-orange:active { transform: translateY(0); }
+
+    .btn-outline {
+      border: 2px solid #fff;
+      color: #fff;
+      font-family: 'Roboto Mono', monospace;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 12px 30px;
+      display: inline-block;
+      transition: background 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { background: #fff; color: #040e1c; }
+
+    /* ── Stat card ── */
+    .stat-divider + .stat-divider { border-left: 1px solid #dde4ec; }
+
+    /* ── grain texture overlay ── */
+    .grain::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    /* ── footer link ── */
+    .foot-link { color: #8899aa; transition: color 0.2s; }
+    .foot-link:hover { color: #f7931e; }
+
+    /* ── Hero animated gradient background ── */
+    @keyframes hero-grad-anim {
+      0%, 18%   { opacity: 1; }
+      23%, 100% { opacity: 0; }
+    }
+    .hero-grad {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      animation: hero-grad-anim 40s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     TOP BAR
+════════════════════════════════════════════ -->
+<div style="background:#040e1c; border-bottom:1px solid #0d2140;">
+  <div style="max-width:1200px; margin:0 auto; padding:8px 24px; display:flex; justify-content:space-between; align-items:center; font-size:13px; color:#8899aa;">
+    <span>A community for IT security professionals, students &amp; enthusiasts</span>
+    <span style="display:flex;gap:20px;align-items:center;">
+      <span>📧 info@itsecurity.com</span>
+      <span style="color:#f7931e;font-family:'Roboto Mono',monospace;font-weight:700;">🔒 Powered by TCR IT Solutions</span>
+    </span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     NAVIGATION
+════════════════════════════════════════════ -->
+<header style="background:#071627; position:sticky; top:0; z-index:100; box-shadow:0 2px 24px rgba(4,14,28,0.5);">
+  <div style="max-width:1200px; margin:0 auto; padding:0 24px; display:flex; align-items:center; justify-content:space-between; height:72px;">
+
+    <!-- Logo -->
+    <div style="display:flex;align-items:center;gap:12px;">
+      <img src="brand_assets/TCR IT Solutions-logos_black.png" alt="TCR IT Solutions"
+           style="height:48px; filter:invert(1) brightness(2);" />
+    </div>
+
+    <!-- Nav -->
+    <nav style="display:flex;gap:28px;align-items:center;">
+      <a href="#services" class="nav-link" style="color:#e2eaf4;font-size:14px;font-family:'Roboto Mono',monospace;font-weight:600;letter-spacing:0.05em;text-decoration:none;text-transform:uppercase;">Events</a>
+      <a href="#about" class="nav-link" style="color:#e2eaf4;font-size:14px;font-family:'Roboto Mono',monospace;font-weight:600;letter-spacing:0.05em;text-decoration:none;text-transform:uppercase;">About</a>
+      <a href="#why" class="nav-link" style="color:#e2eaf4;font-size:14px;font-family:'Roboto Mono',monospace;font-weight:600;letter-spacing:0.05em;text-decoration:none;text-transform:uppercase;">Why Join</a>
+      <a href="#contact" class="nav-link" style="color:#e2eaf4;font-size:14px;font-family:'Roboto Mono',monospace;font-weight:600;letter-spacing:0.05em;text-decoration:none;text-transform:uppercase;">Contact</a>
+      <a href="#contact" class="btn-orange" style="font-size:13px;padding:11px 22px;">Join Us</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════
+     HERO
+════════════════════════════════════════════ -->
+<section class="grain" style="position:relative; background:#040e1c; min-height:580px; display:flex; align-items:center; overflow:hidden;">
+  <!-- BG image with overlay -->
+  <div style="position:absolute;inset:0;">
+    <!-- Animated gradient layers (framer-motion equivalent via CSS keyframes) -->
+    <div class="hero-grad" style="background:linear-gradient(135deg,#2d1b69 0%,#11998e 100%);animation-delay:0s;"></div>
+    <div class="hero-grad" style="background:linear-gradient(135deg,#8e2de2 0%,#4a00e0 100%);animation-delay:-32s;"></div>
+    <div class="hero-grad" style="background:linear-gradient(135deg,#0f3460 0%,#e94560 100%);animation-delay:-24s;"></div>
+    <div class="hero-grad" style="background:linear-gradient(135deg,#134e5e 0%,#71b280 100%);animation-delay:-16s;"></div>
+    <div class="hero-grad" style="background:linear-gradient(135deg,#2d1b69 0%,#11998e 100%);animation-delay:-8s;"></div>
+    <img src="https://placehold.co/1440x600/071627/1a4a7a?text=." alt=""
+         style="width:100%;height:100%;object-fit:cover;opacity:0.35;" />
+    <div style="position:absolute;inset:0;background:linear-gradient(105deg,rgba(4,14,28,0.95) 45%,rgba(4,14,28,0.55) 100%);"></div>
+    <!-- teal radial accent -->
+    <div style="position:absolute;top:-120px;right:-80px;width:640px;height:640px;border-radius:50%;background:radial-gradient(circle,rgba(14,200,192,0.12) 0%,transparent 70%);"></div>
+  </div>
+
+  <div style="position:relative;max-width:1200px;margin:0 auto;padding:80px 24px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;width:100%;">
+
+    <!-- Left: copy -->
+    <div>
+      <p style="font-family:'Roboto Mono',monospace;font-size:13px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#f7931e;margin-bottom:16px;">POWERED BY TCR IT SOLUTIONS</p>
+
+      <h1 style="font-family:'Roboto Mono',monospace;font-size:clamp(38px,5vw,66px);font-weight:700;line-height:1.0;color:#fff;text-transform:uppercase;letter-spacing:-0.02em;margin-bottom:24px;">
+        IT SECURITY<br/>
+        <span style="color:#29ABE2;">SOCIETY</span>
+      </h1>
+
+      <p style="color:#8899aa;font-size:16px;line-height:1.7;margin-bottom:32px;max-width:480px;">
+        A community built for IT security professionals, students, and enthusiasts. Learn, connect, and grow your skills through real-world events, workshops, and hands-on challenges.
+      </p>
+
+      <!-- bullets -->
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:36px;">
+        <li style="display:flex;align-items:center;gap:12px;color:#e2eaf4;font-size:15px;">
+          <span style="width:8px;height:8px;border-radius:50%;background:#f7931e;flex-shrink:0;"></span>
+          Hands-On CTF Competitions &amp; Workshops
+        </li>
+        <li style="display:flex;align-items:center;gap:12px;color:#e2eaf4;font-size:15px;">
+          <span style="width:8px;height:8px;border-radius:50%;background:#f7931e;flex-shrink:0;"></span>
+          Industry Speaker Events &amp; Networking Nights
+        </li>
+        <li style="display:flex;align-items:center;gap:12px;color:#e2eaf4;font-size:15px;">
+          <span style="width:8px;height:8px;border-radius:50%;background:#f7931e;flex-shrink:0;"></span>
+          Mentorship from Certified Security Professionals
+        </li>
+        <li style="display:flex;align-items:center;gap:12px;color:#e2eaf4;font-size:15px;">
+          <span style="width:8px;height:8px;border-radius:50%;background:#f7931e;flex-shrink:0;"></span>
+          Free Resources, Labs &amp; Career Guidance
+        </li>
+      </ul>
+
+      <div style="display:flex;gap:16px;flex-wrap:wrap;">
+        <a href="#contact" class="btn-orange">Join The Society</a>
+        <a href="#services" class="btn-outline">See Events</a>
+      </div>
+    </div>
+
+    <!-- Right: feature image -->
+    <div style="position:relative;">
+      <div style="border-radius:2px;overflow:hidden;box-shadow:0 24px 64px rgba(4,14,28,0.7);">
+        <img src="https://placehold.co/560x420/0d2140/29ABE2?text=IT+Infrastructure" alt="IT Infrastructure"
+             style="width:100%;display:block;" />
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(4,14,28,0.6) 0%,transparent 60%);mix-blend-mode:multiply;"></div>
+      </div>
+      <!-- accent bar -->
+      <div style="position:absolute;bottom:-12px;left:24px;right:24px;height:4px;background:linear-gradient(90deg,#f7931e,#0ec8c0);border-radius:2px;"></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SERVICES GRID
+════════════════════════════════════════════ -->
+<section id="services" style="background:#071627;padding:80px 0;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+
+    <div style="text-align:center;margin-bottom:56px;">
+      <p style="font-family:'Roboto Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#f7931e;margin-bottom:12px;">WHAT WE OFFER</p>
+      <h2 style="font-family:'Roboto Mono',monospace;font-size:clamp(28px,4vw,48px);font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:-0.02em;line-height:1.05;">
+        EVENTS &amp; COMMUNITY ACTIVITIES
+      </h2>
+      <div style="width:60px;height:3px;background:#f7931e;margin:20px auto 0;"></div>
+    </div>
+
+    <!-- Grid -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3px;">
+
+      <!-- Card 1 -->
+      <div class="service-card" style="position:relative;overflow:hidden;cursor:pointer;aspect-ratio:4/3;">
+        <img src="https://placehold.co/400x300/0d2140/29ABE2?text=CTF+Competitions" alt="CTF Competitions" style="width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(30%);" />
+        <div class="overlay" style="position:absolute;inset:0;background:rgba(4,14,28,0.72);"></div>
+        <div class="card-inner" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:24px;">
+          <div style="width:36px;height:3px;background:#f7931e;margin-bottom:12px;"></div>
+          <h3 style="font-family:'Roboto Mono',monospace;font-size:18px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.02em;line-height:1.1;margin-bottom:8px;">CTF Competitions</h3>
+          <p style="color:#8899aa;font-size:13px;line-height:1.6;">Compete in capture-the-flag challenges across web, crypto, forensics, and reverse engineering.</p>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="service-card" style="position:relative;overflow:hidden;cursor:pointer;aspect-ratio:4/3;">
+        <img src="https://placehold.co/400x300/071627/0ec8c0?text=Security+Workshops" alt="Security Workshops" style="width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(30%);" />
+        <div class="overlay" style="position:absolute;inset:0;background:rgba(4,14,28,0.72);"></div>
+        <div class="card-inner" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:24px;">
+          <div style="width:36px;height:3px;background:#f7931e;margin-bottom:12px;"></div>
+          <h3 style="font-family:'Roboto Mono',monospace;font-size:18px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.02em;line-height:1.1;margin-bottom:8px;">Security Workshops</h3>
+          <p style="color:#8899aa;font-size:13px;line-height:1.6;">Practical hands-on sessions covering penetration testing, OSINT, malware analysis, and more.</p>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="service-card" style="position:relative;overflow:hidden;cursor:pointer;aspect-ratio:4/3;">
+        <img src="https://placehold.co/400x300/0d2140/29ABE2?text=Speaker+Events" alt="Speaker Events" style="width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(30%);" />
+        <div class="overlay" style="position:absolute;inset:0;background:rgba(4,14,28,0.72);"></div>
+        <div class="card-inner" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:24px;">
+          <div style="width:36px;height:3px;background:#f7931e;margin-bottom:12px;"></div>
+          <h3 style="font-family:'Roboto Mono',monospace;font-size:18px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.02em;line-height:1.1;margin-bottom:8px;">Speaker Events</h3>
+          <p style="color:#8899aa;font-size:13px;line-height:1.6;">Industry professionals share insights on the latest threats, careers, and emerging security trends.</p>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="service-card" style="position:relative;overflow:hidden;cursor:pointer;aspect-ratio:4/3;">
+        <img src="https://placehold.co/400x300/071627/0ec8c0?text=Networking+Nights" alt="Networking Nights" style="width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(30%);" />
+        <div class="overlay" style="position:absolute;inset:0;background:rgba(4,14,28,0.72);"></div>
+        <div class="card-inner" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:24px;">
+          <div style="width:36px;height:3px;background:#f7931e;margin-bottom:12px;"></div>
+          <h3 style="font-family:'Roboto Mono',monospace;font-size:18px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.02em;line-height:1.1;margin-bottom:8px;">Networking Nights</h3>
+          <p style="color:#8899aa;font-size:13px;line-height:1.6;">Social meetups to connect with peers, hiring managers, and security leaders in the industry.</p>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="service-card" style="position:relative;overflow:hidden;cursor:pointer;aspect-ratio:4/3;">
+        <img src="https://placehold.co/400x300/0d2140/29ABE2?text=Mentorship+Program" alt="Mentorship Program" style="width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(30%);" />
+        <div class="overlay" style="position:absolute;inset:0;background:rgba(4,14,28,0.72);"></div>
+        <div class="card-inner" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:24px;">
+          <div style="width:36px;height:3px;background:#f7931e;margin-bottom:12px;"></div>
+          <h3 style="font-family:'Roboto Mono',monospace;font-size:18px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.02em;line-height:1.1;margin-bottom:8px;">Mentorship Program</h3>
+          <p style="color:#8899aa;font-size:13px;line-height:1.6;">Get paired with an experienced security professional for career guidance, CV reviews, and advice.</p>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="service-card" style="position:relative;overflow:hidden;cursor:pointer;aspect-ratio:4/3;">
+        <img src="https://placehold.co/400x300/071627/0ec8c0?text=Learning+Resources" alt="Learning Resources" style="width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(30%);" />
+        <div class="overlay" style="position:absolute;inset:0;background:rgba(4,14,28,0.72);"></div>
+        <div class="card-inner" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:24px;">
+          <div style="width:36px;height:3px;background:#f7931e;margin-bottom:12px;"></div>
+          <h3 style="font-family:'Roboto Mono',monospace;font-size:18px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.02em;line-height:1.1;margin-bottom:8px;">Learning Resources</h3>
+          <p style="color:#8899aa;font-size:13px;line-height:1.6;">Curated study guides, lab walkthroughs, and certification roadmaps for all experience levels.</p>
+        </div>
+      </div>
+
+      <!-- Card 7 -->
+      <div class="service-card" style="position:relative;overflow:hidden;cursor:pointer;aspect-ratio:4/3;">
+        <img src="https://placehold.co/400x300/0d2140/29ABE2?text=Webinars+%26+Talks" alt="Webinars & Online Talks" style="width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(30%);" />
+        <div class="overlay" style="position:absolute;inset:0;background:rgba(4,14,28,0.72);"></div>
+        <div class="card-inner" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:24px;">
+          <div style="width:36px;height:3px;background:#f7931e;margin-bottom:12px;"></div>
+          <h3 style="font-family:'Roboto Mono',monospace;font-size:18px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.02em;line-height:1.1;margin-bottom:8px;">Webinars &amp; Online Talks</h3>
+          <p style="color:#8899aa;font-size:13px;line-height:1.6;">Virtual sessions on hot topics — accessible to members wherever they are in the US.</p>
+        </div>
+      </div>
+
+      <!-- Card 8 -->
+      <div class="service-card" style="position:relative;overflow:hidden;cursor:pointer;aspect-ratio:4/3;">
+        <img src="https://placehold.co/400x300/071627/0ec8c0?text=Industry+Visits" alt="Industry Visits" style="width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(30%);" />
+        <div class="overlay" style="position:absolute;inset:0;background:rgba(4,14,28,0.72);"></div>
+        <div class="card-inner" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:24px;">
+          <div style="width:36px;height:3px;background:#f7931e;margin-bottom:12px;"></div>
+          <h3 style="font-family:'Roboto Mono',monospace;font-size:18px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.02em;line-height:1.1;margin-bottom:8px;">Industry Visits</h3>
+          <p style="color:#8899aa;font-size:13px;line-height:1.6;">Exclusive behind-the-scenes visits to SOCs, data centres, and security operations teams.</p>
+        </div>
+      </div>
+
+      <!-- Card 9 -->
+      <div class="service-card" style="position:relative;overflow:hidden;cursor:pointer;aspect-ratio:4/3;">
+        <img src="https://placehold.co/400x300/0d2140/29ABE2?text=Career+Support" alt="Career Support" style="width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(30%);" />
+        <div class="overlay" style="position:absolute;inset:0;background:rgba(4,14,28,0.72);"></div>
+        <div class="card-inner" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:24px;">
+          <div style="width:36px;height:3px;background:#f7931e;margin-bottom:12px;"></div>
+          <h3 style="font-family:'Roboto Mono',monospace;font-size:18px;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.02em;line-height:1.1;margin-bottom:8px;">Career Support</h3>
+          <p style="color:#8899aa;font-size:13px;line-height:1.6;">Interview prep, cert guidance, job board access, and direct connections to hiring partners.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="text-align:center;margin-top:48px;">
+      <a href="#contact" class="btn-orange">Join The Society</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     WHY CHOOSE TCR
+════════════════════════════════════════════ -->
+<section id="why" style="background:#fff;padding:80px 0;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;">
+
+    <!-- Left: features -->
+    <div>
+      <p style="font-family:'Roboto Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#f7931e;margin-bottom:12px;">WHY JOIN US</p>
+      <h2 style="font-family:'Roboto Mono',monospace;font-size:clamp(26px,3.5vw,42px);font-weight:700;color:#040e1c;text-transform:uppercase;letter-spacing:-0.02em;line-height:1.05;margin-bottom:12px;">
+        BUILT BY THE COMMUNITY,<br/>FOR THE COMMUNITY
+      </h2>
+      <div style="width:50px;height:3px;background:#f7931e;margin-bottom:28px;"></div>
+      <p style="color:#4a5568;font-size:15px;line-height:1.75;margin-bottom:36px;">
+        The IT Security Society is backed by TCR IT Solutions — a team of certified security professionals committed to growing the next generation of cyber talent. Membership is free and open to all.
+      </p>
+
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:20px;">
+        <li style="display:flex;align-items:flex-start;gap:16px;">
+          <div style="width:42px;height:42px;background:#040e1c;border-radius:2px;flex-shrink:0;display:flex;align-items:center;justify-content:center;">
+            <svg width="20" height="20" fill="none" stroke="#f7931e" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          </div>
+          <div>
+            <h4 style="font-family:'Roboto Mono',monospace;font-size:15px;font-weight:700;color:#040e1c;text-transform:uppercase;letter-spacing:0.03em;margin-bottom:4px;">Real-World Skills</h4>
+            <p style="color:#64748b;font-size:14px;line-height:1.65;">Go beyond theory — build hands-on skills through labs, CTFs, and live scenario exercises.</p>
+          </div>
+        </li>
+        <li style="display:flex;align-items:flex-start;gap:16px;">
+          <div style="width:42px;height:42px;background:#040e1c;border-radius:2px;flex-shrink:0;display:flex;align-items:center;justify-content:center;">
+            <svg width="20" height="20" fill="none" stroke="#f7931e" stroke-width="2" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          </div>
+          <div>
+            <h4 style="font-family:'Roboto Mono',monospace;font-size:15px;font-weight:700;color:#040e1c;text-transform:uppercase;letter-spacing:0.03em;margin-bottom:4px;">Fast-Track Your Career</h4>
+            <p style="color:#64748b;font-size:14px;line-height:1.65;">Access hiring partners, cert support, and a network that opens doors in the security industry.</p>
+          </div>
+        </li>
+        <li style="display:flex;align-items:flex-start;gap:16px;">
+          <div style="width:42px;height:42px;background:#040e1c;border-radius:2px;flex-shrink:0;display:flex;align-items:center;justify-content:center;">
+            <svg width="20" height="20" fill="none" stroke="#f7931e" stroke-width="2" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </div>
+          <div>
+            <h4 style="font-family:'Roboto Mono',monospace;font-size:15px;font-weight:700;color:#040e1c;text-transform:uppercase;letter-spacing:0.03em;margin-bottom:4px;">Expert-Led Mentorship</h4>
+            <p style="color:#64748b;font-size:14px;line-height:1.65;">Learn directly from certified professionals with years of real-world security experience.</p>
+          </div>
+        </li>
+        <li style="display:flex;align-items:flex-start;gap:16px;">
+          <div style="width:42px;height:42px;background:#040e1c;border-radius:2px;flex-shrink:0;display:flex;align-items:center;justify-content:center;">
+            <svg width="20" height="20" fill="none" stroke="#f7931e" stroke-width="2" viewBox="0 0 24 24"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <div>
+            <h4 style="font-family:'Roboto Mono',monospace;font-size:15px;font-weight:700;color:#040e1c;text-transform:uppercase;letter-spacing:0.03em;margin-bottom:4px;">Free to Join</h4>
+            <p style="color:#64748b;font-size:14px;line-height:1.65;">Membership is completely free. No hidden costs — just a community passionate about security.</p>
+          </div>
+        </li>
+      </ul>
+
+      <div style="margin-top:36px;">
+        <a href="#contact" class="btn-orange">Become A Member</a>
+      </div>
+    </div>
+
+    <!-- Right: image -->
+    <div style="position:relative;">
+      <div style="border-radius:2px;overflow:hidden;box-shadow:0 20px 56px rgba(4,14,28,0.18);">
+        <img src="https://placehold.co/540x620/071627/29ABE2?text=TCR+Team" alt="TCR IT Team"
+             style="width:100%;display:block;filter:grayscale(20%);" />
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(4,14,28,0.4) 0%,transparent 50%);"></div>
+      </div>
+      <!-- floating stat badge -->
+      <div style="position:absolute;bottom:32px;left:-32px;background:#f7931e;padding:20px 28px;box-shadow:0 12px 32px rgba(247,147,30,0.35);">
+        <p style="font-family:'Roboto Mono',monospace;font-size:36px;font-weight:700;color:#fff;line-height:1;">FREE</p>
+        <p style="font-family:'Roboto Mono',monospace;font-size:11px;font-weight:600;color:rgba(255,255,255,0.85);letter-spacing:0.12em;text-transform:uppercase;margin-top:4px;">Membership</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     ABOUT / DARK SECTION
+════════════════════════════════════════════ -->
+<section id="about" style="background:#040e1c;padding:80px 0;position:relative;overflow:hidden;">
+  <!-- bg accent -->
+  <div style="position:absolute;bottom:-100px;left:-100px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(14,200,192,0.08) 0%,transparent 70%);"></div>
+
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;position:relative;">
+
+    <!-- Left: image -->
+    <div>
+      <div style="border-radius:2px;overflow:hidden;position:relative;">
+        <img src="https://placehold.co/540x480/071627/0ec8c0?text=Our+Engineers" alt="TCR Engineers"
+             style="width:100%;display:block;" />
+        <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(247,147,30,0.15),transparent 60%);mix-blend-mode:overlay;"></div>
+      </div>
+    </div>
+
+    <!-- Right: copy -->
+    <div>
+      <p style="font-family:'Roboto Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#f7931e;margin-bottom:12px;">ABOUT THE SOCIETY</p>
+      <h2 style="font-family:'Roboto Mono',monospace;font-size:clamp(26px,3.5vw,42px);font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:-0.02em;line-height:1.05;margin-bottom:20px;">
+        LEARN, CONNECT,<br/>LEVEL UP
+      </h2>
+      <div style="width:50px;height:3px;background:#f7931e;margin-bottom:28px;"></div>
+
+      <p style="color:#8899aa;font-size:15px;line-height:1.75;margin-bottom:20px;">
+        The IT Security Society was founded to bridge the gap between academic learning and the real world of cybersecurity. Whether you're a student taking your first steps or a seasoned professional looking to stay sharp, this is your community.
+      </p>
+      <p style="color:#8899aa;font-size:15px;line-height:1.75;margin-bottom:36px;">
+        Backed and run by TCR IT Solutions, our events are led by certified practitioners who bring genuine industry insight to every session.
+      </p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:36px;">
+        <div style="border-left:3px solid #f7931e;padding-left:16px;">
+          <p style="font-family:'Roboto Mono',monospace;font-size:11px;font-weight:600;color:#f7931e;letter-spacing:0.12em;text-transform:uppercase;">Backed By</p>
+          <p style="color:#e2eaf4;font-size:14px;margin-top:6px;">TCR IT Solutions — Cyber Essentials &amp; ISO 27001 Certified</p>
+        </div>
+        <div style="border-left:3px solid #0ec8c0;padding-left:16px;">
+          <p style="font-family:'Roboto Mono',monospace;font-size:11px;font-weight:600;color:#0ec8c0;letter-spacing:0.12em;text-transform:uppercase;">Open To</p>
+          <p style="color:#e2eaf4;font-size:14px;margin-top:6px;">Students, graduates, professionals &amp; career changers</p>
+        </div>
+      </div>
+
+      <a href="#contact" class="btn-orange">Learn More About Us</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     ORANGE CTA BANNER
+════════════════════════════════════════════ -->
+<section style="background:#f7931e;padding:56px 0;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;">
+    <div>
+      <p style="font-family:'Roboto Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.75);margin-bottom:8px;">READY TO GET INVOLVED?</p>
+      <h2 style="font-family:'Roboto Mono',monospace;font-size:clamp(22px,3vw,38px);font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:-0.02em;line-height:1.05;">
+        JOIN THE IT SECURITY SOCIETY TODAY
+      </h2>
+    </div>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;">
+      <a href="mailto:info@itsecurity.com" style="background:#fff;color:#f7931e;font-family:'Roboto Mono',monospace;font-weight:700;font-size:14px;letter-spacing:0.06em;text-transform:uppercase;padding:14px 28px;text-decoration:none;transition:background 0.2s;">
+        Get In Touch
+      </a>
+      <a href="#contact" style="background:#040e1c;color:#fff;font-family:'Roboto Mono',monospace;font-weight:700;font-size:14px;letter-spacing:0.06em;text-transform:uppercase;padding:14px 28px;text-decoration:none;transition:background 0.2s;">
+        Join For Free
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     STATS ROW
+════════════════════════════════════════════ -->
+<section style="background:#fff;padding:64px 0;border-bottom:1px solid #e8edf4;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);text-align:center;">
+
+      <div class="stat-divider" style="padding:24px 32px;">
+        <p style="font-family:'Roboto Mono',monospace;font-size:52px;font-weight:700;color:#040e1c;line-height:1;">500<span style="color:#f7931e;">+</span></p>
+        <p style="font-family:'Roboto Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#8899aa;margin-top:8px;">Community Members</p>
+      </div>
+
+      <div class="stat-divider" style="padding:24px 32px;">
+        <p style="font-family:'Roboto Mono',monospace;font-size:52px;font-weight:700;color:#040e1c;line-height:1;">40<span style="color:#f7931e;">+</span></p>
+        <p style="font-family:'Roboto Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#8899aa;margin-top:8px;">Events Hosted</p>
+      </div>
+
+      <div class="stat-divider" style="padding:24px 32px;">
+        <p style="font-family:'Roboto Mono',monospace;font-size:52px;font-weight:700;color:#040e1c;line-height:1;">100<span style="color:#f7931e;">%</span></p>
+        <p style="font-family:'Roboto Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#8899aa;margin-top:8px;">Free Membership</p>
+      </div>
+
+      <div class="stat-divider" style="padding:24px 32px;">
+        <p style="font-family:'Roboto Mono',monospace;font-size:52px;font-weight:700;color:#040e1c;line-height:1;">20<span style="color:#f7931e;">+</span></p>
+        <p style="font-family:'Roboto Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#8899aa;margin-top:8px;">Industry Mentors</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     TESTIMONIALS
+════════════════════════════════════════════ -->
+<section style="background:#f5f8fc;padding:80px 0;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+
+    <div style="text-align:center;margin-bottom:52px;">
+      <p style="font-family:'Roboto Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#f7931e;margin-bottom:12px;">MEMBER TESTIMONIALS</p>
+      <h2 style="font-family:'Roboto Mono',monospace;font-size:clamp(24px,3.5vw,40px);font-weight:700;color:#040e1c;text-transform:uppercase;letter-spacing:-0.02em;line-height:1.05;">
+        WHAT OUR MEMBERS SAY
+      </h2>
+      <div style="width:50px;height:3px;background:#f7931e;margin:20px auto 0;"></div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+
+      <div style="background:#fff;padding:32px;box-shadow:0 4px 24px rgba(4,14,28,0.07);border-top:3px solid #f7931e;position:relative;">
+        <div style="font-size:48px;color:#f7931e;font-family:Georgia,serif;line-height:0.8;margin-bottom:16px;">"</div>
+        <p style="color:#4a5568;font-size:15px;line-height:1.75;margin-bottom:24px;font-style:italic;">
+          The CTF nights completely changed how I approach security challenges. I landed my first SOC analyst role three months after joining.
+        </p>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:44px;height:44px;border-radius:50%;background:#071627;display:flex;align-items:center;justify-content:center;font-family:'Roboto Mono',monospace;font-weight:700;color:#f7931e;font-size:16px;">JM</div>
+          <div>
+            <p style="font-family:'Roboto Mono',monospace;font-size:13px;font-weight:700;color:#040e1c;text-transform:uppercase;">Jamie M.</p>
+            <p style="font-size:12px;color:#8899aa;">SOC Analyst, Member since 2024</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:#fff;padding:32px;box-shadow:0 4px 24px rgba(4,14,28,0.07);border-top:3px solid #0ec8c0;position:relative;">
+        <div style="font-size:48px;color:#0ec8c0;font-family:Georgia,serif;line-height:0.8;margin-bottom:16px;">"</div>
+        <p style="color:#4a5568;font-size:15px;line-height:1.75;margin-bottom:24px;font-style:italic;">
+          The mentorship programme gave me the confidence to go for my OSCP. My mentor was incredible — patient, knowledgeable, and always available.
+        </p>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:44px;height:44px;border-radius:50%;background:#071627;display:flex;align-items:center;justify-content:center;font-family:'Roboto Mono',monospace;font-weight:700;color:#0ec8c0;font-size:16px;">SR</div>
+          <div>
+            <p style="font-family:'Roboto Mono',monospace;font-size:13px;font-weight:700;color:#040e1c;text-transform:uppercase;">Sophie R.</p>
+            <p style="font-size:12px;color:#8899aa;">Pentest Trainee, Member since 2023</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:#fff;padding:32px;box-shadow:0 4px 24px rgba(4,14,28,0.07);border-top:3px solid #040e1c;position:relative;">
+        <div style="font-size:48px;color:#040e1c;font-family:Georgia,serif;line-height:0.8;margin-bottom:16px;">"</div>
+        <p style="color:#4a5568;font-size:15px;line-height:1.75;margin-bottom:24px;font-style:italic;">
+          I came in as a complete beginner and the society made me feel so welcome. The workshops are practical, fun, and genuinely useful — highly recommend.
+        </p>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:44px;height:44px;border-radius:50%;background:#071627;display:flex;align-items:center;justify-content:center;font-family:'Roboto Mono',monospace;font-weight:700;color:#fff;font-size:16px;">DH</div>
+          <div>
+            <p style="font-family:'Roboto Mono',monospace;font-size:13px;font-weight:700;color:#040e1c;text-transform:uppercase;">Dan H.</p>
+            <p style="font-size:12px;color:#8899aa;">CS Student, Member since 2025</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     COVERAGE MAP
+════════════════════════════════════════════ -->
+<section style="background:#fff;padding:80px 0;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;">
+
+    <div>
+      <p style="font-family:'Roboto Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#f7931e;margin-bottom:12px;">OUR COMMUNITY</p>
+      <h2 style="font-family:'Roboto Mono',monospace;font-size:clamp(24px,3.5vw,40px);font-weight:700;color:#040e1c;text-transform:uppercase;letter-spacing:-0.02em;line-height:1.05;margin-bottom:20px;">
+        OPEN TO MEMBERS<br/>ACROSS THE US
+      </h2>
+      <div style="width:50px;height:3px;background:#f7931e;margin-bottom:28px;"></div>
+      <p style="color:#4a5568;font-size:15px;line-height:1.75;margin-bottom:28px;">
+        We run in-person events across the US as well as online sessions that anyone can attend. Join members from all regions who share a passion for IT security and professional development.
+      </p>
+
+      <ul style="list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <li style="display:flex;align-items:center;gap:10px;font-size:14px;color:#1a2d42;">
+          <span style="width:6px;height:6px;border-radius:50%;background:#f7931e;flex-shrink:0;"></span> Southwest (Las Vegas, Phoenix, LA)
+        </li>
+        <li style="display:flex;align-items:center;gap:10px;font-size:14px;color:#1a2d42;">
+          <span style="width:6px;height:6px;border-radius:50%;background:#f7931e;flex-shrink:0;"></span> West Coast (Seattle, San Francisco)
+        </li>
+        <li style="display:flex;align-items:center;gap:10px;font-size:14px;color:#1a2d42;">
+          <span style="width:6px;height:6px;border-radius:50%;background:#f7931e;flex-shrink:0;"></span> Central (Dallas, Chicago, Denver)
+        </li>
+        <li style="display:flex;align-items:center;gap:10px;font-size:14px;color:#1a2d42;">
+          <span style="width:6px;height:6px;border-radius:50%;background:#f7931e;flex-shrink:0;"></span> Northeast (New York, Boston, DC)
+        </li>
+        <li style="display:flex;align-items:center;gap:10px;font-size:14px;color:#1a2d42;">
+          <span style="width:6px;height:6px;border-radius:50%;background:#f7931e;flex-shrink:0;"></span> Southeast (Atlanta, Miami, Austin)
+        </li>
+        <li style="display:flex;align-items:center;gap:10px;font-size:14px;color:#1a2d42;">
+          <span style="width:6px;height:6px;border-radius:50%;background:#f7931e;flex-shrink:0;"></span> Online / Remote
+        </li>
+      </ul>
+    </div>
+
+    <!-- US Map -->
+    <div style="position:relative;">
+      <div style="border-radius:2px;overflow:hidden;box-shadow:0 16px 48px rgba(4,14,28,0.12);">
+        <div id="us-map" style="width:100%;background:#040e1c;"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     CONTACT FORM
+════════════════════════════════════════════ -->
+<section id="contact" style="background:#071627;padding:80px 0;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:72px;">
+
+    <!-- Left: info -->
+    <div>
+      <p style="font-family:'Roboto Mono',monospace;font-size:12px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#f7931e;margin-bottom:12px;">GET INVOLVED</p>
+      <h2 style="font-family:'Roboto Mono',monospace;font-size:clamp(26px,3.5vw,42px);font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:-0.02em;line-height:1.05;margin-bottom:20px;">
+        JOIN THE SOCIETY —<br/>IT'S FREE
+      </h2>
+      <div style="width:50px;height:3px;background:#f7931e;margin-bottom:28px;"></div>
+      <p style="color:#8899aa;font-size:15px;line-height:1.75;margin-bottom:40px;">
+        Sign up below to become a member, get notified about upcoming events, and connect with the IT Security Society community.
+      </p>
+
+      <div style="display:flex;flex-direction:column;gap:24px;">
+        <div style="display:flex;gap:16px;align-items:flex-start;">
+          <div style="width:44px;height:44px;background:#f7931e;flex-shrink:0;display:flex;align-items:center;justify-content:center;border-radius:2px;">
+            <svg width="20" height="20" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+          </div>
+          <div>
+            <p style="font-family:'Roboto Mono',monospace;font-size:11px;font-weight:600;color:#f7931e;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:4px;">Email</p>
+            <p style="color:#e2eaf4;font-size:16px;">info@itsecurity.com</p>
+          </div>
+        </div>
+        <div style="display:flex;gap:16px;align-items:flex-start;">
+          <div style="width:44px;height:44px;background:#f7931e;flex-shrink:0;display:flex;align-items:center;justify-content:center;border-radius:2px;">
+            <svg width="20" height="20" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </div>
+          <div>
+            <p style="font-family:'Roboto Mono',monospace;font-size:11px;font-weight:600;color:#f7931e;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:4px;">LinkedIn</p>
+            <p style="color:#e2eaf4;font-size:16px;">IT Security Society</p>
+          </div>
+        </div>
+        <div style="display:flex;gap:16px;align-items:flex-start;">
+          <div style="width:44px;height:44px;background:#f7931e;flex-shrink:0;display:flex;align-items:center;justify-content:center;border-radius:2px;">
+            <svg width="20" height="20" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </div>
+          <div>
+            <p style="font-family:'Roboto Mono',monospace;font-size:11px;font-weight:600;color:#f7931e;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:4px;">Based In</p>
+            <p style="color:#e2eaf4;font-size:16px;">Las Vegas, NV — Events nationwide</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: form -->
+    <div>
+      <form style="display:flex;flex-direction:column;gap:16px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div>
+            <label style="font-family:'Roboto Mono',monospace;font-size:11px;font-weight:600;color:#8899aa;letter-spacing:0.12em;text-transform:uppercase;display:block;margin-bottom:8px;">First Name</label>
+            <input type="text" placeholder="John" style="width:100%;background:#040e1c;border:1px solid #1a2d42;color:#e2eaf4;font-family:'Montserrat',sans-serif;font-size:14px;padding:12px 16px;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#f7931e'" onblur="this.style.borderColor='#1a2d42'" />
+          </div>
+          <div>
+            <label style="font-family:'Roboto Mono',monospace;font-size:11px;font-weight:600;color:#8899aa;letter-spacing:0.12em;text-transform:uppercase;display:block;margin-bottom:8px;">Last Name</label>
+            <input type="text" placeholder="Smith" style="width:100%;background:#040e1c;border:1px solid #1a2d42;color:#e2eaf4;font-family:'Montserrat',sans-serif;font-size:14px;padding:12px 16px;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#f7931e'" onblur="this.style.borderColor='#1a2d42'" />
+          </div>
+        </div>
+        <div>
+          <label style="font-family:'Roboto Mono',monospace;font-size:11px;font-weight:600;color:#8899aa;letter-spacing:0.12em;text-transform:uppercase;display:block;margin-bottom:8px;">Email Address</label>
+          <input type="email" placeholder="you@email.com" style="width:100%;background:#040e1c;border:1px solid #1a2d42;color:#e2eaf4;font-family:'Montserrat',sans-serif;font-size:14px;padding:12px 16px;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#f7931e'" onblur="this.style.borderColor='#1a2d42'" />
+        </div>
+        <div>
+          <label style="font-family:'Roboto Mono',monospace;font-size:11px;font-weight:600;color:#8899aa;letter-spacing:0.12em;text-transform:uppercase;display:block;margin-bottom:8px;">Experience Level</label>
+          <select style="width:100%;background:#040e1c;border:1px solid #1a2d42;color:#e2eaf4;font-family:'Montserrat',sans-serif;font-size:14px;padding:12px 16px;outline:none;appearance:none;" onfocus="this.style.borderColor='#f7931e'" onblur="this.style.borderColor='#1a2d42'">
+            <option value="">Select your level...</option>
+            <option>Complete Beginner</option>
+            <option>Student / University</option>
+            <option>Early Career (0–2 years)</option>
+            <option>Mid-Level Professional</option>
+            <option>Senior / Expert</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-family:'Roboto Mono',monospace;font-size:11px;font-weight:600;color:#8899aa;letter-spacing:0.12em;text-transform:uppercase;display:block;margin-bottom:8px;">Areas of Interest</label>
+          <select style="width:100%;background:#040e1c;border:1px solid #1a2d42;color:#e2eaf4;font-family:'Montserrat',sans-serif;font-size:14px;padding:12px 16px;outline:none;appearance:none;" onfocus="this.style.borderColor='#f7931e'" onblur="this.style.borderColor='#1a2d42'">
+            <option value="">Select an area...</option>
+            <option>Penetration Testing</option>
+            <option>Threat Intelligence</option>
+            <option>Digital Forensics</option>
+            <option>Cloud Security</option>
+            <option>Security Operations (SOC)</option>
+            <option>General / Not Sure Yet</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-family:'Roboto Mono',monospace;font-size:11px;font-weight:600;color:#8899aa;letter-spacing:0.12em;text-transform:uppercase;display:block;margin-bottom:8px;">Message</label>
+          <textarea rows="4" placeholder="Tell us a bit about yourself and what you're hoping to get from the society..." style="width:100%;background:#040e1c;border:1px solid #1a2d42;color:#e2eaf4;font-family:'Montserrat',sans-serif;font-size:14px;padding:12px 16px;outline:none;resize:vertical;transition:border-color 0.2s;" onfocus="this.style.borderColor='#f7931e'" onblur="this.style.borderColor='#1a2d42'"></textarea>
+        </div>
+        <button type="submit" class="btn-orange" style="border:none;cursor:pointer;width:100%;justify-content:center;font-size:14px;">
+          Join The Society
+        </button>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════ -->
+<footer style="background:#040e1c;border-top:1px solid #0d2140;padding:64px 0 0;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px;">
+
+      <!-- Brand col -->
+      <div>
+        <img src="brand_assets/TCR IT Solutions-logos_black.png" alt="TCR IT Solutions"
+             style="height:56px;filter:invert(1) brightness(2);margin-bottom:20px;" />
+        <p style="color:#8899aa;font-size:14px;line-height:1.75;margin-bottom:24px;max-width:280px;">
+          A community for IT security professionals, students, and enthusiasts. Powered by TCR IT Solutions.
+        </p>
+        <div style="display:flex;gap:12px;">
+          <a href="#" style="width:36px;height:36px;background:#0d2140;border-radius:2px;display:flex;align-items:center;justify-content:center;transition:background 0.2s;" onmouseover="this.style.background='#f7931e'" onmouseout="this.style.background='#0d2140'">
+            <svg width="16" height="16" fill="#8899aa" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="#" style="width:36px;height:36px;background:#0d2140;border-radius:2px;display:flex;align-items:center;justify-content:center;transition:background 0.2s;" onmouseover="this.style.background='#f7931e'" onmouseout="this.style.background='#0d2140'">
+            <svg width="16" height="16" fill="#8899aa" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Services -->
+      <div>
+        <p style="font-family:'Roboto Mono',monospace;font-size:12px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#fff;margin-bottom:20px;">Activities</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
+          <li><a href="#" class="foot-link" style="font-size:14px;text-decoration:none;">CTF Competitions</a></li>
+          <li><a href="#" class="foot-link" style="font-size:14px;text-decoration:none;">Workshops</a></li>
+          <li><a href="#" class="foot-link" style="font-size:14px;text-decoration:none;">Speaker Events</a></li>
+          <li><a href="#" class="foot-link" style="font-size:14px;text-decoration:none;">Mentorship</a></li>
+          <li><a href="#" class="foot-link" style="font-size:14px;text-decoration:none;">Webinars</a></li>
+          <li><a href="#" class="foot-link" style="font-size:14px;text-decoration:none;">Networking Nights</a></li>
+        </ul>
+      </div>
+
+      <!-- Company -->
+      <div>
+        <p style="font-family:'Roboto Mono',monospace;font-size:12px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#fff;margin-bottom:20px;">Society</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
+          <li><a href="#about" class="foot-link" style="font-size:14px;text-decoration:none;">About Us</a></li>
+          <li><a href="#" class="foot-link" style="font-size:14px;text-decoration:none;">Our Team</a></li>
+          <li><a href="#" class="foot-link" style="font-size:14px;text-decoration:none;">Blog &amp; Resources</a></li>
+          <li><a href="#" class="foot-link" style="font-size:14px;text-decoration:none;">TCR IT Solutions</a></li>
+          <li><a href="#contact" class="foot-link" style="font-size:14px;text-decoration:none;">Join Us</a></li>
+          <li><a href="#contact" class="foot-link" style="font-size:14px;text-decoration:none;">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Legal -->
+      <div>
+        <p style="font-family:'Roboto Mono',monospace;font-size:12px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#fff;margin-bottom:20px;">Resources</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
+          <li><a href="#" class="foot-link" style="font-size:14px;text-decoration:none;">Member Portal</a></li>
+          <li><a href="#" class="foot-link" style="font-size:14px;text-decoration:none;">Study Guides</a></li>
+          <li><a href="#" class="foot-link" style="font-size:14px;text-decoration:none;">Event Archive</a></li>
+          <li><a href="#" class="foot-link" style="font-size:14px;text-decoration:none;">Privacy Policy</a></li>
+          <li><a href="#" class="foot-link" style="font-size:14px;text-decoration:none;">Terms of Service</a></li>
+          <li><a href="#" class="foot-link" style="font-size:14px;text-decoration:none;">GDPR</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Bottom bar -->
+    <div style="border-top:1px solid #0d2140;padding:20px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+      <p style="color:#8899aa;font-size:13px;">© 2026 IT Security Society. Powered by TCR IT Solutions LLC. Based in Las Vegas, NV.</p>
+      <div style="display:flex;gap:24px;">
+        <a href="#" class="foot-link" style="font-size:12px;text-decoration:none;font-family:'Roboto Mono',monospace;letter-spacing:0.05em;">Privacy</a>
+        <a href="#" class="foot-link" style="font-size:12px;text-decoration:none;font-family:'Roboto Mono',monospace;letter-spacing:0.05em;">Terms</a>
+        <a href="#" class="foot-link" style="font-size:12px;text-decoration:none;font-family:'Roboto Mono',monospace;letter-spacing:0.05em;">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3"></script>
+<script>
+(async function () {
+  const container = document.getElementById('us-map');
+  if (!container) return;
+
+  const width  = container.offsetWidth || 540;
+  const height = Math.round(width * 0.63);
+
+  /* ── Region → FIPS mapping ── */
+  const regionMap = {
+    /* Southwest */
+    '06':'sw','32':'sw','04':'sw','35':'sw','49':'sw',
+    /* West Coast */
+    '53':'wc','41':'wc',
+    /* Central */
+    '08':'cn','16':'cn','30':'cn','56':'cn','38':'cn','46':'cn','31':'cn',
+    '20':'cn','27':'cn','19':'cn','17':'cn','55':'cn','26':'cn','18':'cn',
+    '39':'cn','29':'cn','40':'cn','48':'cn','05':'cn','22':'cn','28':'cn',
+    '01':'cn','47':'cn','21':'cn',
+    /* Northeast */
+    '23':'ne','33':'ne','50':'ne','25':'ne','44':'ne','09':'ne','36':'ne',
+    '34':'ne','42':'ne','10':'ne','24':'ne','51':'ne','54':'ne','11':'ne',
+    /* Southeast */
+    '37':'se','45':'se','13':'se','12':'se',
+  };
+
+  const colors = {
+    sw: '#f7931e',   /* brand orange  — Southwest */
+    wc: '#0ec8c0',   /* brand teal    — West Coast */
+    cn: '#29ABE2',   /* brand bright  — Central    */
+    ne: '#1a6fa8',   /* deeper blue   — Northeast  */
+    se: '#2a8a72',   /* teal-green    — Southeast  */
+    _:  '#0d2140',   /* brand navy    — AK/HI/unassigned */
+  };
+
+  /* ── Cities ── */
+  const cities = [
+    { name:'Las Vegas',     lat:36.17, lon:-115.14, hq:true  },
+    { name:'Los Angeles',   lat:34.05, lon:-118.24           },
+    { name:'Phoenix',       lat:33.45, lon:-112.07           },
+    { name:'Seattle',       lat:47.61, lon:-122.33           },
+    { name:'San Francisco', lat:37.77, lon:-122.42           },
+    { name:'Denver',        lat:39.74, lon:-104.98           },
+    { name:'Dallas',        lat:32.78, lon:-96.80            },
+    { name:'Chicago',       lat:41.88, lon:-87.63            },
+    { name:'New York',      lat:40.71, lon:-74.01            },
+    { name:'Boston',        lat:42.36, lon:-71.06            },
+    { name:'Washington DC', lat:38.91, lon:-77.04            },
+    { name:'Atlanta',       lat:33.75, lon:-84.39            },
+    { name:'Miami',         lat:25.77, lon:-80.19            },
+    { name:'Austin',        lat:30.27, lon:-97.74            },
+  ];
+
+  /* ── Build SVG ── */
+  const projection = d3.geoAlbersUsa()
+    .scale(width * 1.28)
+    .translate([width / 2, height / 2]);
+
+  const path = d3.geoPath().projection(projection);
+
+  const svg = d3.select('#us-map')
+    .append('svg')
+    .attr('viewBox', `0 0 ${width} ${height}`)
+    .attr('width', '100%')
+    .style('display', 'block')
+    .style('background', '#040e1c');
+
+  /* ── Fetch TopoJSON ── */
+  let us;
+  try {
+    us = await d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json');
+  } catch (e) {
+    container.innerHTML = '<p style="color:#8899aa;padding:40px;text-align:center;font-family:Montserrat,sans-serif;">Map unavailable</p>';
+    return;
+  }
+
+  const states = topojson.feature(us, us.objects.states);
+
+  /* ── State fills ── */
+  svg.selectAll('path.state')
+    .data(states.features)
+    .join('path')
+    .attr('class', 'state')
+    .attr('d', path)
+    .attr('fill', d => {
+      const fips = String(d.id).padStart(2,'0');
+      return colors[regionMap[fips] || '_'];
+    })
+    .attr('stroke', 'rgba(4,14,28,0.6)')
+    .attr('stroke-width', 0.8);
+
+  /* ── State border mesh ── */
+  svg.append('path')
+    .datum(topojson.mesh(us, us.objects.states, (a,b) => a !== b))
+    .attr('d', path)
+    .attr('fill', 'none')
+    .attr('stroke', 'rgba(255,255,255,0.12)')
+    .attr('stroke-width', 0.5);
+
+  /* ── City markers ── */
+  cities.forEach(city => {
+    const coords = projection([city.lon, city.lat]);
+    if (!coords) return;
+    const [x, y] = coords;
+
+    if (city.hq) {
+      /* Pulse ring */
+      svg.append('circle').attr('cx',x).attr('cy',y).attr('r',10)
+        .attr('fill','#f7931e').attr('opacity',0.18);
+      svg.append('circle').attr('cx',x).attr('cy',y).attr('r',7)
+        .attr('fill','#f7931e').attr('opacity',0.25);
+    }
+
+    svg.append('circle')
+      .attr('cx', x).attr('cy', y)
+      .attr('r', city.hq ? 5 : 3)
+      .attr('fill', city.hq ? '#f7931e' : '#ffffff')
+      .attr('stroke', city.hq ? '#fff' : 'rgba(255,255,255,0.4)')
+      .attr('stroke-width', city.hq ? 1.5 : 0.8);
+  });
+
+  /* ── Legend ── */
+  const legendItems = [
+    { label:'Southwest',  color: colors.sw },
+    { label:'West Coast', color: colors.wc },
+    { label:'Central',    color: colors.cn },
+    { label:'Northeast',  color: colors.ne },
+    { label:'Southeast',  color: colors.se },
+  ];
+
+  const lg = svg.append('g').attr('transform', `translate(10,${height - legendItems.length * 18 - 12})`);
+  legendItems.forEach((d, i) => {
+    const g = lg.append('g').attr('transform', `translate(0,${i * 18})`);
+    g.append('rect').attr('width',11).attr('height',11).attr('rx',2).attr('fill',d.color);
+    g.append('text').attr('x',16).attr('y',9.5)
+      .attr('fill','#e2eaf4').attr('font-size','10px')
+      .attr('font-family','Montserrat,sans-serif').text(d.label);
+  });
+
+  /* ── HQ callout ── */
+  const hqG = svg.append('g').attr('transform',`translate(${width - 130}, ${height - 24})`);
+  hqG.append('circle').attr('cx',6).attr('cy',6).attr('r',5).attr('fill','#f7931e');
+  hqG.append('text').attr('x',16).attr('y',10)
+    .attr('fill','#e2eaf4').attr('font-size','10px')
+    .attr('font-family','Montserrat,sans-serif').text('HQ — Las Vegas, NV');
+})();
+</script>
+</body>
+</html>
